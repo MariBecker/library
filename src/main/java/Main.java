@@ -1,31 +1,39 @@
-import java.io.*;
-
 import controller.BookController;
-import model.*;
+import model.Book;
+
+import java.io.IOException;
+import java.text.MessageFormat;
+import java.util.Scanner;
+import static view.CreateBookView.*;
+import static view.MenuView.*;
 
 public class Main {
+    private static final Scanner input = new Scanner(System.in);
+
     public static void main(String[] args) throws IOException {
 
-//        // Lê os dados binários
-//        InputStream fis = new FileInputStream("src/dados.txt");
-//        // Converte os binários para characters
-//        Reader isr = new InputStreamReader(fis);
-//        // Converte os characteres para uma linha inteira
-//        BufferedReader br = new BufferedReader(isr);
-//
-//        String linha = br.readLine();
-//
-//        while (linha != null) {
-//            System.out.println(linha);
-//            linha = br.readLine();
-//        }
-//
-//        br.close();
+        showMenu();
 
-        Book livro = new Book(1, "livro volume 1", "Roger Oliver");
-        BookController controller = new BookController();
+        int selectedOption = input.nextInt();
 
-        controller.Save(livro, "src/dados.json");
+        Book newBook = null;
+        BookController bookController = new BookController();
+
+        switch(selectedOption) {
+            case 1:
+                newBook = createBook();
+                break;
+            case 2:
+                System.out.println("Opção 02 não implementada ainda.");
+                break;
+            default:
+                System.out.println("Selecione um opção valida");
+        }
+        
+        bookController.create(newBook, "src/dados.json");
+
+
+
 
     }
 }
